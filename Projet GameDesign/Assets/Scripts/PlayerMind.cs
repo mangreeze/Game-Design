@@ -57,7 +57,7 @@ public class PlayerMind : MonoBehaviour
         }
     }
 
-    void SetDarkVariable(bool newDark)
+    public void SetDarkVariable(bool newDark)
     {
         dark = newDark;
     }
