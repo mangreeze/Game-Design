@@ -12,9 +12,8 @@ public enum State
 public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
-    public int hp = 100;
+    private PlayerMind pm;
     public float speed = 5f;
-    public int curseLevel = 0;
     private bool facingRight;
 
     public float jumpForce = 2;
@@ -27,6 +26,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        pm = GetComponent<PlayerMind>();
     }
 
     void Jump()
@@ -82,6 +82,18 @@ public class Player : MonoBehaviour
         if (collectible)
         {
             collectible.Interact();
+        }
+        if (collision.tag == "SafeArea")
+        {
+            pm.SetDarkVariable(false);
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "SafeArea")
+        {
+            pm.SetDarkVariable(true);
         }
     }
 }

@@ -20,13 +20,14 @@ public class MindBar : MonoBehaviour
     {
         slider.value = mind;
 
+
         fill.color = gradient.Evaluate(slider.normalizedValue);
     }
 
     public void LoseOneMind()
     {
         if (slider.value > 0) {
-            slider.value = slider.value - 1;
+            slider.value -= 1;
             fill.color = gradient.Evaluate(slider.normalizedValue);
         }
     }

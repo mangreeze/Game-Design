@@ -11,6 +11,8 @@ public class PlayerMind : MonoBehaviour
     public int maxMind = 100;
     public int currentMind;
     public int addMind = 5;
+    public GameObject tm1;
+    public GameObject tm2;
 
     public MindBar mindBar;
 
@@ -19,6 +21,24 @@ public class PlayerMind : MonoBehaviour
     {
         currentMind = maxMind;
         mindBar.SetMaxMind(maxMind);
+    }
+
+    private void WooshTilemaps()
+    {
+        if ( currentMind <= 66 && tm1.activeSelf)
+        {
+            tm1.SetActive(false);
+        } else if (currentMind > 66 && !tm1.activeSelf)
+        {
+            tm1.SetActive(true);
+        }
+        if (currentMind <= 33 && tm2.activeSelf)
+        {
+            tm2.SetActive(false);
+        } else if (currentMind > 33 && !tm2.activeSelf)
+        {
+            tm2.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -30,7 +50,7 @@ public class PlayerMind : MonoBehaviour
         {
             if (dark && currentMind > 0)
             {
-                currentMind = currentMind - 1;
+                currentMind -= 1;
                 mindBar.LoseOneMind();
             } else
             {
@@ -43,6 +63,7 @@ public class PlayerMind : MonoBehaviour
             timer -= waitTime;
         }
         mindBar.SetMind(currentMind);
+        WooshTilemaps();
     }
 
     void RecoverMind(int mindRecover)
@@ -57,7 +78,7 @@ public class PlayerMind : MonoBehaviour
         }
     }
 
-    void SetDarkVariable(bool newDark)
+    public void SetDarkVariable(bool newDark)
     {
         dark = newDark;
     }
